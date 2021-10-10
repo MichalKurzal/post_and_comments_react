@@ -29,7 +29,7 @@ export default function Login() {
         </Typography>
         <TextField required id="outlined-required" label="Name" />
         <TextField required id="outlined-required" label="Password" />
-        <Link to="/posts">
+        <Link to="/posts" replace>
           <Button variant="contained">Login</Button>
         </Link>
       </Stack>
