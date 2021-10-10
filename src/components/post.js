@@ -1,12 +1,22 @@
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 const Post = ({ postContent }) => {
   return (
     <Card sx={{ minWidth: 275, width: "80%", margin: 6 }}>
+      <CardMedia
+        component="img"
+        image="/columns.jpg"
+        alt="columns"
+        sx={{
+          maxHeight: 600,
+        }}
+      />
       <CardContent>
         <Typography variant="h3">{postContent.title}</Typography>
         <Typography variant="body2">
