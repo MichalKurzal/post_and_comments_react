@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Post from "./post";
 
 export default function Posts() {
   const [_posts, setposts] = useState([]);
@@ -18,5 +19,5 @@ export default function Posts() {
     }
   };
 
-  return <h2>Posts</h2>;
+  return _posts.map((post) => <Post key={post.id} postContent={post} />);
 }
