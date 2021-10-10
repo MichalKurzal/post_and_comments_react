@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -28,7 +29,9 @@ export default function Login() {
         </Typography>
         <TextField required id="outlined-required" label="Name" />
         <TextField required id="outlined-required" label="Password" />
-        <Button variant="contained">Login</Button>
+        <Link to="/posts">
+          <Button variant="contained">Login</Button>
+        </Link>
       </Stack>
     </Box>
   );
