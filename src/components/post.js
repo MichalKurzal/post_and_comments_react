@@ -18,7 +18,7 @@ const Post = ({ postContent }) => {
     getComments(param).then((result) => {
       setComments(result);
       setExpanded(!expanded);
-      console.log(result[0].name);
+      console.log(result);
     });
   };
 
