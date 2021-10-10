@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Box from "@mui/material/Box";
+
 import Post from "./post";
 
 export default function Posts() {
@@ -19,5 +21,18 @@ export default function Posts() {
     }
   };
 
-  return _posts.map((post) => <Post key={post.id} postContent={post} />);
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {_posts.map((post) => (
+        <Post key={post.id} postContent={post} />
+      ))}
+    </Box>
+  );
 }
