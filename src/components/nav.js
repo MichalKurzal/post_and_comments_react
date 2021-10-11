@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { Link } from "react-router-dom";
+import newPost from "../api/postComment";
 import { useLocation } from "react-router-dom";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
@@ -21,10 +22,16 @@ export default function NavBar() {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
+    display: "flex",
+    flexDirection: "column",
   };
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const submitPost = () => {
+    setOpen(false);
+    newPost();
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -58,10 +65,19 @@ export default function NavBar() {
                   </Typography>
                   <TextareaAutosize
                     aria-label="minimum height"
+                    minRows={2}
+                    placeholder="Title of the Post"
+                    style={{ width: "80%" }}
+                  />
+                  <TextareaAutosize
+                    aria-label="minimum height"
                     minRows={10}
                     placeholder="Write a Post"
                     style={{ width: "80%" }}
                   />
+                  <Button onClick={() => submitPost()} color="inherit">
+                    Submit
+                  </Button>
                 </Box>
               </Modal>
             </div>
