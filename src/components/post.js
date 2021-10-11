@@ -15,11 +15,15 @@ const Post = ({ postContent }) => {
 
   const handleExpandClick = (param) => {
     console.log("comments");
-    getComments(param).then((result) => {
-      setComments(result);
-      setExpanded(!expanded);
-      console.log(result);
-    });
+    getComments(param)
+      .then((result) => {
+        setComments(result);
+        setExpanded(!expanded);
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -43,6 +47,8 @@ const Post = ({ postContent }) => {
         <Button size="small" onClick={() => handleExpandClick(postContent.id)}>
           Comments
         </Button>
+        <Button size="small">New Comment</Button>
+        <Button size="small">Edit Post</Button>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
