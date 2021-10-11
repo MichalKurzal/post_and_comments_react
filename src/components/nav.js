@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 export default function NavBar() {
   const location = useLocation();
@@ -55,10 +56,12 @@ export default function NavBar() {
                   >
                     Create a new Post
                   </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor
-                    ligula.
-                  </Typography>
+                  <TextareaAutosize
+                    aria-label="minimum height"
+                    minRows={10}
+                    placeholder="Write a Post"
+                    style={{ width: "80%" }}
+                  />
                 </Box>
               </Modal>
             </div>
