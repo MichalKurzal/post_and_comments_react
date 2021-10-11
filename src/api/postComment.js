@@ -1,9 +1,9 @@
-const newPost = async () => {
+const newPost = async (title, body) => {
   return fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
     body: JSON.stringify({
-      title: "foo",
-      body: "bar",
+      title: title,
+      body: body,
       userId: 1,
     }),
     headers: {

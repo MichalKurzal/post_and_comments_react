@@ -26,11 +26,20 @@ export default function NavBar() {
     flexDirection: "column",
   };
   const [open, setOpen] = React.useState(false);
+  const [_post, setPost] = React.useState("New Post");
+  const [_postTitle, setPostTitle] = React.useState("Post Title");
+
+  const handleChange = (event) => {
+    setPost(event.target.value);
+  };
+  const handleChangeTitle = (event) => {
+    setPostTitle(event.target.value);
+  };
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const submitPost = () => {
+  const submitPost = (title, body) => {
     setOpen(false);
-    newPost();
+    newPost(title, body);
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -64,18 +73,25 @@ export default function NavBar() {
                     Create a new Post
                   </Typography>
                   <TextareaAutosize
+                    value={_postTitle}
+                    onChange={handleChangeTitle}
                     aria-label="minimum height"
                     minRows={2}
                     placeholder="Title of the Post"
                     style={{ width: "80%" }}
                   />
                   <TextareaAutosize
+                    value={_post}
+                    onChange={handleChange}
                     aria-label="minimum height"
                     minRows={10}
                     placeholder="Write a Post"
                     style={{ width: "80%" }}
                   />
-                  <Button onClick={() => submitPost()} color="inherit">
+                  <Button
+                    onClick={() => submitPost(_postTitle, _post)}
+                    color="inherit"
+                  >
                     Submit
                   </Button>
                 </Box>
