@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -6,12 +6,24 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Collapse from "@mui/material/Collapse";
+import Modal from "@mui/material/Modal";
 import getComments from "../api/comments";
 import Comment from "./comment";
+import Box from "@mui/material/Box";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
+import editPost from "../api/editPost";
 
 const Post = ({ postContent }) => {
   const [comments, setComments] = useState([]);
   const [expanded, setExpanded] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [_post, setPost] = React.useState("New Post");
+  const [_postTitle, setPostTitle] = React.useState("Post Title");
+
+  useEffect(() => {
+    setPost(postContent.body);
+    setPostTitle(postContent.title);
+  }, [postContent]);
 
   const handleExpandClick = (param) => {
     console.log("comments");
@@ -24,6 +36,33 @@ const Post = ({ postContent }) => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+    display: "flex",
+    flexDirection: "column",
+  };
+
+  const handleChange = (event) => {
+    setPost(event.target.value);
+  };
+  const handleChangeTitle = (event) => {
+    setPostTitle(event.target.value);
+  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const submitPost = (title, body, id) => {
+    setOpen(false);
+    editPost(title, body, id);
   };
 
   return (
@@ -48,7 +87,43 @@ const Post = ({ postContent }) => {
           Comments
         </Button>
         <Button size="small">New Comment</Button>
-        <Button size="small">Edit Post</Button>
+        <Button size="small" onClick={handleOpen}>
+          Edit Post
+        </Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Edit a Post
+            </Typography>
+            <TextareaAutosize
+              value={_postTitle}
+              onChange={handleChangeTitle}
+              aria-label="minimum height"
+              minRows={2}
+              placeholder="Title of the Post"
+              style={{ width: "80%" }}
+            />
+            <TextareaAutosize
+              value={_post}
+              onChange={handleChange}
+              aria-label="minimum height"
+              minRows={10}
+              placeholder="Write a Post"
+              style={{ width: "80%" }}
+            />
+            <Button
+              onClick={() => submitPost(_postTitle, _post, postContent.id)}
+              color="inherit"
+            >
+              Submit
+            </Button>
+          </Box>
+        </Modal>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
