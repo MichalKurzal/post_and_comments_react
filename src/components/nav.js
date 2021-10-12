@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { Link } from "react-router-dom";
-import newPost from "../api/postComment";
+import newPost from "../api/newPost";
 import { useLocation } from "react-router-dom";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 
