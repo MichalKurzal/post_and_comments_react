@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "./components/nav";
 import Login from "./components/login";
 import Posts from "./components/posts";
@@ -8,8 +8,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
 function App() {
+  const [userID, setUserID] = useState(1);
   return (
-    <AppContext.Provider value={"context"}>
+    <AppContext.Provider value={{ userID, setUserID }}>
       <Router>
         <div className="App">
           <NavBar />
