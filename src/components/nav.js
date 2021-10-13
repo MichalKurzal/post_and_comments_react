@@ -97,10 +97,7 @@ export default function NavBar() {
                     placeholder="Write a Post"
                     style={{ width: "80%" }}
                   />
-                  <Button
-                    onClick={() => submitPost(_postTitle, _post)}
-                    style={linkStyle}
-                  >
+                  <Button onClick={() => submitPost(_postTitle, _post)}>
                     Submit
                   </Button>
                 </Box>
