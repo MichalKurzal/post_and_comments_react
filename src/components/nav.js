@@ -53,7 +53,9 @@ export default function NavBar() {
       <AppBar position="static">
         <Toolbar>
           <Link to="/posts">
-            <Button style={linkStyle}>Coding Case - Posts</Button>
+            {location.pathname !== "/" ? (
+              <Button style={linkStyle}>Coding Case - Posts</Button>
+            ) : null}
           </Link>
           {location.pathname !== "/" ? (
             <Link to="/">
