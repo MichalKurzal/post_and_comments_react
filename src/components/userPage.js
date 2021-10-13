@@ -10,21 +10,25 @@ const UserPage = () => {
   const [userData, setUserData] = useState([]);
   useEffect(() => {
     console.log(userID);
-    getUser(userID).then((res) => {
-      setUserData(res);
-      console.log(res);
-    });
+    getUser(userID)
+      .then((res) => {
+        setUserData(res);
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (
-    <Box
+    <Stack
+      direction="column"
+      spacing={3}
       sx={{
-        display: "flex",
-        justifyContent: "space-evenly",
-        flexDirection: "column",
-        alignItems: "center",
-        paddingTop: 10,
+        paddingTop: 5,
       }}
+      justifyContent="space-between"
+      alignItems="center"
     >
       <Typography variant="h3">{userData.name}</Typography>
 
@@ -53,7 +57,20 @@ const UserPage = () => {
         alignItems="center"
       >
         <Typography variant="h6">City : </Typography>
-        <Typography>{userData.address.city}</Typography>
+        <Typography>
+          {userData.address !== undefined ? userData.address.city : null}
+        </Typography>
+      </Stack>
+      <Stack
+        direction="row"
+        spacing={3}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Typography variant="h6">ZipCode : </Typography>
+        <Typography>
+          {userData.address !== undefined ? userData.address.zipcode : null}
+        </Typography>
       </Stack>
       <Stack
         direction="row"
@@ -64,7 +81,7 @@ const UserPage = () => {
         <Typography variant="h6">E-Mail</Typography>
         <Typography>{userData.email}</Typography>
       </Stack>
-    </Box>
+    </Stack>
   );
 };
 

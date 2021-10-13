@@ -41,21 +41,28 @@ export default function NavBar() {
     setOpen(false);
     newPost(title, body);
   };
+
+  const linkStyle = {
+    margin: "1rem",
+    textDecoration: "none",
+    color: "white",
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Coding Case
-          </Typography>
+          <Link to="/posts">
+            <Button style={linkStyle}>Coding Case - Posts</Button>
+          </Link>
           {location.pathname !== "/" ? (
             <Link to="/">
-              <Button color="inherit">Logout</Button>
+              <Button style={linkStyle}>Logout</Button>
             </Link>
           ) : null}
           {location.pathname !== "/" ? (
             <div>
-              <Button onClick={handleOpen} color="inherit">
+              <Button onClick={handleOpen} style={linkStyle}>
                 New Post
               </Button>
               <Modal
@@ -90,7 +97,7 @@ export default function NavBar() {
                   />
                   <Button
                     onClick={() => submitPost(_postTitle, _post)}
-                    color="inherit"
+                    style={linkStyle}
                   >
                     Submit
                   </Button>
@@ -100,10 +107,10 @@ export default function NavBar() {
           ) : null}
           {location.pathname !== "/" ? (
             <Link to="/user">
-              <Button color="inherit">User</Button>
+              <Button style={linkStyle}>User</Button>
             </Link>
           ) : (
-            <Button color="inherit">Login</Button>
+            <Button style={linkStyle}>Login</Button>
           )}
         </Toolbar>
       </AppBar>
