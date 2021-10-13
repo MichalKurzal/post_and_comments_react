@@ -3,7 +3,7 @@ import NavBar from "./components/nav";
 import Login from "./components/login";
 import Posts from "./components/posts";
 import UserPage from "./components/userPage";
-import { AppContext } from "./api/contex";
+import AppContext from "./api/contex";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 

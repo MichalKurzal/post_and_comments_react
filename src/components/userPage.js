@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import { AppContext } from "../api/contex";
+import AppContext from "../api/contex";
 import getUser from "../api/getUser";
 
 const UserPage = () => {
@@ -18,7 +17,7 @@ const UserPage = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [userID]);
 
   return (
     <Stack

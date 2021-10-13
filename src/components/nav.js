@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,9 +9,11 @@ import { Link } from "react-router-dom";
 import newPost from "../api/newPost";
 import { useLocation } from "react-router-dom";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
+import AppContext from "../api/contex";
 
 export default function NavBar() {
   const location = useLocation();
+  const { userID } = useContext(AppContext);
   const style = {
     position: "absolute",
     top: "50%",
@@ -25,9 +27,9 @@ export default function NavBar() {
     display: "flex",
     flexDirection: "column",
   };
-  const [open, setOpen] = React.useState(false);
-  const [_post, setPost] = React.useState("New Post");
-  const [_postTitle, setPostTitle] = React.useState("Post Title");
+  const [open, setOpen] = useState(false);
+  const [_post, setPost] = useState("New Post");
+  const [_postTitle, setPostTitle] = useState("Post Title");
 
   const handleChange = (event) => {
     setPost(event.target.value);
@@ -39,7 +41,7 @@ export default function NavBar() {
   const handleClose = () => setOpen(false);
   const submitPost = (title, body) => {
     setOpen(false);
-    newPost(title, body);
+    newPost(title, body, userID);
   };
 
   const linkStyle = {
