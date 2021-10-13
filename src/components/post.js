@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -12,13 +12,15 @@ import Comment from "./comment";
 import Box from "@mui/material/Box";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import editPost from "../api/editPost";
+import AppContext from "../api/contex";
 
 const Post = ({ postContent }) => {
+  const { userID } = useContext(AppContext);
   const [comments, setComments] = useState([]);
   const [expanded, setExpanded] = useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [_post, setPost] = React.useState("New Post");
-  const [_postTitle, setPostTitle] = React.useState("Post Title");
+  const [open, setOpen] = useState(false);
+  const [_post, setPost] = useState("New Post");
+  const [_postTitle, setPostTitle] = useState("Post Title");
 
   useEffect(() => {
     setPost(postContent.body);
@@ -62,7 +64,7 @@ const Post = ({ postContent }) => {
   const handleClose = () => setOpen(false);
   const submitPost = (title, body, id) => {
     setOpen(false);
-    editPost(title, body, id);
+    editPost(title, body, id, userID);
   };
 
   return (
