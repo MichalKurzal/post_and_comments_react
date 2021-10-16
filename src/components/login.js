@@ -11,7 +11,7 @@ export default function Login() {
   const history = useHistory();
   const submitLogin = () => {
     loginMock()
-      .then(() => history.replace("./posts"))
+      .then(() => history.replace("/posts"))
       .catch(() => console.log("login rejected"));
   };
   return (
