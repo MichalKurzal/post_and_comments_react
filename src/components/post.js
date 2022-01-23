@@ -15,128 +15,137 @@ import editPost from '../api/editPost';
 import AppContext from '../api/contex';
 
 const Post = ({ postContent }) => {
-  const { userID } = useContext(AppContext);
-  const [comments, setComments] = useState([]);
-  const [expanded, setExpanded] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [_post, setPost] = useState('New Post');
-  const [_postTitle, setPostTitle] = useState('Post Title');
+    const { userID } = useContext(AppContext);
+    const [comments, setComments] = useState([]);
+    const [expanded, setExpanded] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [_post, setPost] = useState('New Post');
+    const [_postTitle, setPostTitle] = useState('Post Title');
 
-  const handleChange = (event) => setPost(event.target.value);
-  const handleChangeTitle = (event) => setPostTitle(event.target.value);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+    const handleChange = (event) => setPost(event.target.value);
+    const handleChangeTitle = (event) => setPostTitle(event.target.value);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
-  useEffect(() => {
-    setPost(postContent.body);
-    setPostTitle(postContent.title);
-  }, [postContent]);
+    useEffect(() => {
+        setPost(postContent.body);
+        setPostTitle(postContent.title);
+    }, [postContent]);
 
-  const handleExpandClick = (param) => {
-    console.log('comments');
-    getComments(param)
-      .then((result) => {
-        setComments(result);
-        setExpanded(!expanded);
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    const handleExpandClick = (param) => {
+        console.log('comments');
+        getComments(param)
+            .then((result) => {
+                setComments(result);
+                setExpanded(!expanded);
+                console.log(result);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
-  const submitPost = (title, body, id) => {
-    setOpen(false);
-    editPost(title, body, id, userID);
-  };
+    const submitPost = (title, body, id) => {
+        setOpen(false);
+        editPost(title, body, id, userID);
+    };
 
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    display: 'flex',
-    flexDirection: 'column',
-  };
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+        display: 'flex',
+        flexDirection: 'column',
+    };
 
-  const cardStyle = {
-    minWidth: 275,
-    width: '80%',
-    margin: 6,
-  };
+    const cardStyle = {
+        minWidth: 275,
+        width: '80%',
+        margin: 6,
+    };
 
-  return (
-    <Card sx={cardStyle}>
-      <CardMedia
-        component="img"
-        image="/columns.jpg"
-        alt="columns"
-        sx={{
-          maxHeight: 600,
-        }}
-      />
-      <CardContent>
-        <Typography variant="h3">{postContent.title}</Typography>
-        <Typography variant="body2">
-          <br />
-          {postContent.body}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={() => handleExpandClick(postContent.id)}>
-          Comments
-        </Button>
-        <Button size="small">New Comment</Button>
-        <Button size="small" onClick={handleOpen}>
-          Edit Post
-        </Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Edit a Post
-            </Typography>
-            <TextareaAutosize
-              value={_postTitle}
-              onChange={handleChangeTitle}
-              aria-label="minimum height"
-              minRows={2}
-              placeholder="Title of the Post"
-              style={{ width: '80%' }}
+    return (
+        <Card sx={cardStyle}>
+            <CardMedia
+                component="img"
+                image="/columns.jpg"
+                alt="columns"
+                sx={{
+                    maxHeight: 600,
+                }}
             />
-            <TextareaAutosize
-              value={_post}
-              onChange={handleChange}
-              aria-label="minimum height"
-              minRows={10}
-              placeholder="Write a Post"
-              style={{ width: '80%' }}
-            />
-            <Button
-              onClick={() => submitPost(_postTitle, _post, postContent.id)}
-              color="inherit"
-            >
-              Submit
-            </Button>
-          </Box>
-        </Modal>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Comment comments={comments} />
-        </CardContent>
-      </Collapse>
-    </Card>
-  );
+            <CardContent>
+                <Typography variant="h3">{postContent.title}</Typography>
+                <Typography variant="body2">
+                    <br />
+                    {postContent.body}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Button
+                    size="small"
+                    onClick={() => handleExpandClick(postContent.id)}
+                >
+                    Comments
+                </Button>
+                <Button size="small">New Comment</Button>
+                <Button size="small" onClick={handleOpen}>
+                    Edit Post
+                </Button>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        <Typography
+                            id="modal-modal-title"
+                            variant="h6"
+                            component="h2"
+                        >
+                            Edit a Post
+                        </Typography>
+                        <TextareaAutosize
+                            value={_postTitle}
+                            onChange={handleChangeTitle}
+                            aria-label="minimum height"
+                            minRows={2}
+                            placeholder="Title of the Post"
+                            style={{ width: '80%' }}
+                        />
+                        <TextareaAutosize
+                            value={_post}
+                            onChange={handleChange}
+                            aria-label="minimum height"
+                            minRows={10}
+                            placeholder="Write a Post"
+                            style={{ width: '80%' }}
+                        />
+                        <Button
+                            onClick={() =>
+                                submitPost(_postTitle, _post, postContent.id)
+                            }
+                            color="inherit"
+                        >
+                            Submit
+                        </Button>
+                    </Box>
+                </Modal>
+            </CardActions>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                    <Comment comments={comments} />
+                </CardContent>
+            </Collapse>
+        </Card>
+    );
 };
 
 export default Post;

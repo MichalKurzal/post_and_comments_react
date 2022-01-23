@@ -8,43 +8,43 @@ import { useHistory } from 'react-router-dom';
 import loginMock from '../api/mocklogin';
 
 export default function Login() {
-  const history = useHistory();
-  
-  const submitLogin = () => {
-    loginMock()
-      .then(() => {
-        localStorage.setItem('isAuthenticated', 'true');
-        history.replace('/posts');
-      })
-      .catch(() => console.log('login rejected'));
-  };
+    const history = useHistory();
 
-  const boxStyle = {
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    paddingTop: 10,
-  };
+    const submitLogin = () => {
+        loginMock()
+            .then(() => {
+                localStorage.setItem('isAuthenticated', 'true');
+                history.replace('/posts');
+            })
+            .catch(() => console.log('login rejected'));
+    };
 
-  return (
-    <Box component="form" sx={boxStyle} noValidate autoComplete="off">
-      <Stack
-        spacing={4}
-        divider={<Divider orientation="horizontal" flexItem />}
-        direction="column"
-      >
-        <Typography variant="h3" gutterBottom>
-          Login
-        </Typography>
-        <TextField required id="outlined-required" label="Name" />
-        <TextField required id="outlined-required" label="Password" />
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => submitLogin()}
-        >
-          Login
-        </Button>
-      </Stack>
-    </Box>
-  );
+    const boxStyle = {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        paddingTop: 10,
+    };
+
+    return (
+        <Box component="form" sx={boxStyle} noValidate autoComplete="off">
+            <Stack
+                spacing={4}
+                divider={<Divider orientation="horizontal" flexItem />}
+                direction="column"
+            >
+                <Typography variant="h3" gutterBottom>
+                    Login
+                </Typography>
+                <TextField required id="outlined-required" label="Name" />
+                <TextField required id="outlined-required" label="Password" />
+                <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={() => submitLogin()}
+                >
+                    Login
+                </Button>
+            </Stack>
+        </Box>
+    );
 }
