@@ -1,34 +1,34 @@
-import React, { useState, useContext } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import newPost from "../api/newPost";
-import { useLocation, Link } from "react-router-dom";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
-import AppContext from "../api/contex";
+import React, { useState, useContext } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import newPost from '../api/newPost';
+import { useLocation, Link } from 'react-router-dom';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
+import AppContext from '../api/contex';
 
 export default function NavBar() {
   const location = useLocation();
   const { userID } = useContext(AppContext);
   const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
   };
   const [open, setOpen] = useState(false);
-  const [_post, setPost] = useState("New Post");
-  const [_postTitle, setPostTitle] = useState("Post Title");
+  const [_post, setPost] = useState('New Post');
+  const [_postTitle, setPostTitle] = useState('Post Title');
 
   const handleChange = (event) => {
     setPost(event.target.value);
@@ -38,15 +38,16 @@ export default function NavBar() {
   };
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const logout = () => localStorage.clear();
   const submitPost = (title, body) => {
     setOpen(false);
     newPost(title, body, userID);
   };
 
   const linkStyle = {
-    margin: "1rem",
-    textDecoration: "none",
-    color: "white",
+    margin: '1rem',
+    textDecoration: 'none',
+    color: 'white',
   };
 
   return (
@@ -54,16 +55,18 @@ export default function NavBar() {
       <AppBar position="static">
         <Toolbar>
           <Link to="/posts">
-            {location.pathname !== "/" ? (
+            {location.pathname !== '/' ? (
               <Button style={linkStyle}>Coding Case - Posts</Button>
             ) : null}
           </Link>
-          {location.pathname !== "/" ? (
+          {location.pathname !== '/' ? (
             <Link to="/">
-              <Button style={linkStyle}>Logout</Button>
+              <Button style={linkStyle} onClick={logout}>
+                Logout
+              </Button>
             </Link>
           ) : null}
-          {location.pathname !== "/" ? (
+          {location.pathname !== '/' ? (
             <div>
               <Button onClick={handleOpen} style={linkStyle}>
                 New Post
@@ -88,7 +91,7 @@ export default function NavBar() {
                     aria-label="minimum height"
                     minRows={2}
                     placeholder="Title of the Post"
-                    style={{ width: "80%" }}
+                    style={{ width: '80%' }}
                   />
                   <TextareaAutosize
                     value={_post}
@@ -96,7 +99,7 @@ export default function NavBar() {
                     aria-label="minimum height"
                     minRows={10}
                     placeholder="Write a Post"
-                    style={{ width: "80%" }}
+                    style={{ width: '80%' }}
                   />
                   <Button onClick={() => submitPost(_postTitle, _post)}>
                     Submit
@@ -105,7 +108,7 @@ export default function NavBar() {
               </Modal>
             </div>
           ) : null}
-          {location.pathname !== "/" ? (
+          {location.pathname !== '/' ? (
             <Link to="/user">
               <Button style={linkStyle}>User</Button>
             </Link>

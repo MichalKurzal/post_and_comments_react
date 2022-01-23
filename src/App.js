@@ -6,6 +6,7 @@ import UserPage from "./components/userPage";
 import AppContext from "./api/contex";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
+import ProtectedRoute from "./api/protectedRoute";
 
 function App() {
   const [userID, setUserID] = useState(1);
@@ -16,8 +17,8 @@ function App() {
           <NavBar />
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route path="/posts" component={Posts} />
-            <Route path="/user" component={UserPage} />
+            <ProtectedRoute path="/posts" component={Posts} />
+            <ProtectedRoute path="/user" component={UserPage} />
           </Switch>
         </div>
       </Router>
