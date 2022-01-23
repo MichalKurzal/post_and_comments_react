@@ -9,6 +9,7 @@ import loginMock from '../api/mocklogin';
 
 export default function Login() {
   const history = useHistory();
+  
   const submitLogin = () => {
     loginMock()
       .then(() => {
@@ -17,17 +18,15 @@ export default function Login() {
       })
       .catch(() => console.log('login rejected'));
   };
+
+  const boxStyle = {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    paddingTop: 10,
+  };
+
   return (
-    <Box
-      component="form"
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-evenly',
-        paddingTop: 10,
-      }}
-      noValidate
-      autoComplete="off"
-    >
+    <Box component="form" sx={boxStyle} noValidate autoComplete="off">
       <Stack
         spacing={4}
         divider={<Divider orientation="horizontal" flexItem />}

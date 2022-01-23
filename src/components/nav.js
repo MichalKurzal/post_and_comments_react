@@ -13,6 +13,29 @@ import AppContext from '../api/contex';
 export default function NavBar() {
   const location = useLocation();
   const { userID } = useContext(AppContext);
+  const [open, setOpen] = useState(false);
+  const [_post, setPost] = useState('New Post');
+  const [_postTitle, setPostTitle] = useState('Post Title');
+
+  const handleChange = (event) => setPost(event.target.value);
+  const handleChangeTitle = (event) => setPostTitle(event.target.value);
+  
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const logout = () => localStorage.clear();
+
+  const submitPost = (title, body) => {
+    setOpen(false);
+    newPost(title, body, userID);
+  };
+
+  const linkStyle = {
+    margin: '1rem',
+    textDecoration: 'none',
+    color: 'white',
+  };
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -26,29 +49,10 @@ export default function NavBar() {
     display: 'flex',
     flexDirection: 'column',
   };
-  const [open, setOpen] = useState(false);
-  const [_post, setPost] = useState('New Post');
-  const [_postTitle, setPostTitle] = useState('Post Title');
 
-  const handleChange = (event) => {
-    setPost(event.target.value);
-  };
-  const handleChangeTitle = (event) => {
-    setPostTitle(event.target.value);
-  };
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const logout = () => localStorage.clear();
-  const submitPost = (title, body) => {
-    setOpen(false);
-    newPost(title, body, userID);
-  };
-
-  const linkStyle = {
-    margin: '1rem',
-    textDecoration: 'none',
-    color: 'white',
-  };
+  const textAreaStyle = {
+    width: '80%'
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }} data-testid="nav-element">
@@ -91,7 +95,7 @@ export default function NavBar() {
                     aria-label="minimum height"
                     minRows={2}
                     placeholder="Title of the Post"
-                    style={{ width: '80%' }}
+                    style={textAreaStyle}
                   />
                   <TextareaAutosize
                     value={_post}
@@ -99,7 +103,7 @@ export default function NavBar() {
                     aria-label="minimum height"
                     minRows={10}
                     placeholder="Write a Post"
-                    style={{ width: '80%' }}
+                    style={textAreaStyle}
                   />
                   <Button onClick={() => submitPost(_postTitle, _post)}>
                     Submit

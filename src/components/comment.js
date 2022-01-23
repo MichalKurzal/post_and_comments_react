@@ -1,9 +1,15 @@
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import Avatar from "@mui/material/Avatar";
-import Divider from "@mui/material/Divider";
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
 
 const Comment = ({ comments }) => {
+  const AvatarStyle = {
+    marginRight: 3,
+    width: 36,
+    height: 36,
+  };
+
   return comments.map((_comment) => (
     <Stack divider={<Divider orientation="horizontal" flexItem />}>
       <Stack
@@ -11,11 +17,7 @@ const Comment = ({ comments }) => {
         alignItems="baseline"
         flexDirection="row"
       >
-        <Avatar
-          src="favicon.ico"
-          sx={{ marginRight: 3, width: 36, height: 36 }}
-        />
-
+        <Avatar src="favicon.ico" sx={AvatarStyle} />
         <Typography> E-Mail: {_comment.email}</Typography>
       </Stack>
       <Stack justifyContent="flex-start" alignItems="flex-start">

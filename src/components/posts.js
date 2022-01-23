@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import getPosts from "../api/getPosts";
-import Box from "@mui/material/Box";
-import Post from "./post";
+import React, { useState, useEffect } from 'react';
+import getPosts from '../api/getPosts';
+import Box from '@mui/material/Box';
+import Post from './post';
 
 export default function Posts() {
   const [_posts, setposts] = useState([]);
@@ -17,15 +17,15 @@ export default function Posts() {
       });
   }, []);
 
+  const boxStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Box sx={boxStyle}>
       {_posts.map((post) => (
         <Post key={post.id} postContent={post} />
       ))}
